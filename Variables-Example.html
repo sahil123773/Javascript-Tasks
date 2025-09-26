@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var x = 10;
+        console.log(x);
+
+        var x = 20; // re-declaration allowed
+        console.log(x);
+
+        x = 30; // re-assignment allowed
+        console.log(x);
+
+        let y = 10;
+        console.log(y); // 10
+
+        // let y = 20; // re-declaration not allowed
+        // console.log(y); // SyntaxError
+
+        y = 20; // re-assignment allowed
+        console.log(y); // 20
+
+
+        const z = 10;
+        console.log(z); // 10
+
+        // const z = 20; // re-declaration not allowed
+        // console.log(z); // SyntaxError
+
+        // z = 20; // re-assignment not allowed
+        // console.log(z); // TypeError
+
+    </script>
+</body>
+
+</html>
