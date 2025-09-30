@@ -8,7 +8,7 @@
     <style>
         #card-container {
             display: grid;
-            grid-template-columns: repeat(4,1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             padding: 20px;
         }
@@ -20,7 +20,7 @@
             padding: 15px;
             border-radius: 8px;
             width: 100%;
-            
+
             min-height: 400px;
             flex-direction: column;
             justify-content: space-between;
@@ -36,19 +36,19 @@
 
         }
 
-        .card:hover{
+        .card:hover {
             cursor: pointer;
-           transform: scale(1.05);
-           box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 
 <body>
-    <div id="card-container">
 
-    </div>
+   <div id="card-container">
 
+   </div>
     <script>
         let cards = document.getElementById("card-container");
         const cardData = [
@@ -294,24 +294,18 @@
             }
         ];
 
-        for (let i=0;i < cardData.length;i++) {
+        for (let i = 0; i < cardData.length; i++) {
             const cardContain = document.createElement('div');
-            cardContain.classList.add('card');
-
-            let cardImage = document.createElement("img");
-            cardImage.src = cardData[i].image;
-
-            let cardTitle = document.createElement("h2");
-            cardTitle.textContent = cardData[i].title;
-
-            let cardPrice = document.createElement("p");
-            cardPrice.innerHTML = "<b>price:</b> $" + cardData[i].price;
-
-            cardContain.appendChild(cardImage);
-            cardContain.appendChild(cardTitle);
-            cardContain.appendChild(cardPrice);
-
-            cards.appendChild(cardContain);
+            cardContain.className = 'card';
+            cardContain.innerHTML = `
+                <img src="${cardData[i].image}" alt="">
+                <div id="products">
+                    <div class="product-title">${cardData[i].title}</div>
+                    <div class="product-price">${cardData[i].price}</div>
+                </div>`
+                document.addEventListener("DOMContentLoaded", () => {
+                 cards.appendChild(cardContain);
+               });
         }
     </script>
 </body>
