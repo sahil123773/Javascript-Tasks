@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let ChooseDrink = Number(prompt("Choose a drink:\n1. Tea\n2. Coffee\n3. Juice"));
+        let drink;
+
+        switch(ChooseDrink) {
+            case 1:
+                drink = "Tea";
+                break;
+            case 2:
+                drink = "Coffee";
+                break;
+            case 3:
+                drink = "Juice";
+                break;
+            default:
+                drink = "Invalid Choice";
+        }
+
+        document.write(`You selected: ${drink}`);
+    </script>
+</body>
+</html>

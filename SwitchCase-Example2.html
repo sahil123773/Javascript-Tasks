@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let LightColour = prompt("Enter a Light Colour:");
+        let SignalName;
+        switch (LightColour) {
+            case "red":
+                SignalName="Stop";
+                break;
+
+            case "yellow":
+                SignalName = "Get Ready,";
+                break;
+
+            case "green":
+                SignalName = "Go";
+                break;
+            default:
+                SignalName = "Invalid"
+        }
+
+        document.write(`Light Colour is ${LightColour}-${SignalName}`);
+
+
+    </script>
+</body>
+
+</html>
