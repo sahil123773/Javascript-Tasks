@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         function fact(num){
+            if(num < 0){
+                return -1;
+            }
+            let fact=1;
+            for(let i = 1;i <= num; i++){
+               fact*=i;
+            }
+            return fact;
+        }
+
+        let number=Number(prompt("Enter a Number: "));
+        let result=fact(number);
+        if(result === -1){
+            document.write("Factorial is not a negative");
+        }else{
+            document.write("Factorial of " + number + " is " + result);
+        }
+    </script>
+</body>
+</html>
