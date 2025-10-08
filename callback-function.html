@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Callback Example</title>
+</head>
+<body>
+    <script>    
+        function students(name, age, email, totalmarks = 0, maxmarks = 0, callback) {
+            let percentage = (totalmarks / maxmarks) * 100;
+
+            let Grade;
+            if(percentage > 90){
+                Grade = "A";
+            } else if(percentage > 80){
+                Grade = "B";
+            } else if(percentage > 70){
+                Grade = "C";
+            } else {
+                Grade = "D";
+            }
+
+            let student = {
+                name,
+                age,
+                email,
+                totalMarks: totalmarks,
+                maxMarks: maxmarks,
+                percentage: percentage,
+                Grade
+            };
+            callback(student);
+        }
+        document.write("<h3>Student Details:</h3>");
+        function details(student){
+            document.write("Name: " + student.name + "<br>");
+            document.write("Age: " + student.age + "<br>");
+            document.write("Email: " + student.email + "<br>");
+            document.write("Total Marks: " + student.totalMarks + "/" + student.maxMarks + "<br>");
+            document.write("Percentage: " + student.percentage + "%<br>");
+            document.write("Grade: " + student.Grade + "<br>");
+            document.write("<br><br>");
+        }
+
+        let student1 = students("John", 22, "john@gmail.com", 450, 500, details);
+        let student2 = students("rohan", 24, "rohan@gmail.com", 150, 500, details);
+    </script>
+</body>
+</html>
