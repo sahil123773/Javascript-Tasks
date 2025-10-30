@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .main {
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .buttons button {
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: blue;
+            color: white;
+            transform: scale(1.05);
+
+        }
+
         #card-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -41,16 +67,73 @@
             transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
+
+        .add-to-cart {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+
+        .premiumtag {
+            background-color: gold;
+            color: black;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 8px;
+            width: fit-content;
+            align-self: center;
+
+        }
+
+       @media (max-width: 768px) {
+         #card-container{
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        #card-container{
+          grid-template-columns: 1fr;
+        }
+
+        .buttons{
+          justify-content: flex-start;
+        }
+      }
     </style>
 </head>
 
 <body>
+    <div class="main">
+        <h2>Our Products</h2>
+        <p>Discover our wide range of products</p>
+        <hr>
+    </div>
 
-   <div id="card-container">
+    <div class="buttons">
+        <button class="filter-btn active" data-category="all">All Products</button>
+        <button class="filter-btn" data-category="men's clothing">Men's Clothing</button>
+        <button class="filter-btn" data-category="women's clothing">Women's Clothing</button>
+        <button class="filter-btn" data-category="jewelery">Jewelery</button>
+        <button class="filter-btn" data-category="electronics">Electronics</button>
+    </div>
+    <div id="card-container">
 
-   </div>
+    </div>
     <script>
-        let cards = document.getElementById("card-container");
         const cardData = [
             {
                 "id": 1,
@@ -293,20 +376,60 @@
                 }
             }
         ];
-
-        for (let i = 0; i < cardData.length; i++) {
-            const cardContain = document.createElement('div');
-            cardContain.className = 'card';
-            cardContain.innerHTML = `
-                <img src="${cardData[i].image}" alt="">
-                <div id="products">
-                    <div class="product-title">${cardData[i].title}</div>
-                    <div class="product-price">${cardData[i].price}</div>
-                </div>`
-                document.addEventListener("DOMContentLoaded", () => {
-                 cards.appendChild(cardContain);
-               });
+        let cards = document.getElementById("card-container");
+        function getstars(rate) {
+            let stars = "";
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rate)) {
+                    stars += `<span style="color:#f39c12;">&#9733;</span>`;
+                } else {
+                    stars += `<span style="color:#ccc;">&#9734;</span>`;
+                }
+            }
+            return stars;
         }
+        let cardMain = []
+        function displayproduct(category) {
+            cards.innerHTML = '';
+
+            let filterdata;
+            if (category.toLowerCase() === "all") {
+                filterdata = cardData;
+            } else {
+                filterdata = cardData.filter(item => item.category.toLowerCase() === category.toLowerCase());
+            }
+
+            if (filterdata.length === 0) {
+                cards.innerHTML = "<h3>No products found.</h3>";
+                return;
+            }
+            filterdata.forEach(item => {
+                let premiumtag = "";
+                if (item.price > 100) {
+                    premiumtag = `<span class="premiumtag">Premium</span>`;
+                }
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    ${premiumtag}
+                    <div class="product-title">${item.title}</div>
+                    <div class="product-price">$${item.price}</div>
+                    <div class="product-rating">${getstars(item.rating.rate)} (${item.rating.count})</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                `;
+                cards.appendChild(card);
+            });
+        }
+        displayproduct('all');
+
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                displayproduct(category);
+            });
+        });
+
     </script>
 </body>
 
